@@ -1,0 +1,48 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShumiLog.AppHost", "ShumiLog.AppHost\ShumiLog.AppHost.csproj", "{45AEC6AA-696B-47B4-80EB-684A8D0DB74F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShumiLog.ServiceDefaults", "ShumiLog.ServiceDefaults\ShumiLog.ServiceDefaults.csproj", "{E1A8B259-4FE7-463B-B85E-CFB39BD44B10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShumiLog.ApiService", "ShumiLog.ApiService\ShumiLog.ApiService.csproj", "{2B433800-E386-44A8-B76D-0C06D7F89617}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShumiLog.Web", "ShumiLog.Web\ShumiLog.Web.csproj", "{FAF11065-8B13-4C1E-9328-ADEB709CF261}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShumiLog.Tests", "ShumiLog.Tests\ShumiLog.Tests.csproj", "{4A29C52B-42EF-4F8D-B122-D7B8571F177A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45AEC6AA-696B-47B4-80EB-684A8D0DB74F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45AEC6AA-696B-47B4-80EB-684A8D0DB74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45AEC6AA-696B-47B4-80EB-684A8D0DB74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45AEC6AA-696B-47B4-80EB-684A8D0DB74F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1A8B259-4FE7-463B-B85E-CFB39BD44B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1A8B259-4FE7-463B-B85E-CFB39BD44B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1A8B259-4FE7-463B-B85E-CFB39BD44B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1A8B259-4FE7-463B-B85E-CFB39BD44B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B433800-E386-44A8-B76D-0C06D7F89617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B433800-E386-44A8-B76D-0C06D7F89617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B433800-E386-44A8-B76D-0C06D7F89617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B433800-E386-44A8-B76D-0C06D7F89617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF11065-8B13-4C1E-9328-ADEB709CF261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF11065-8B13-4C1E-9328-ADEB709CF261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF11065-8B13-4C1E-9328-ADEB709CF261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF11065-8B13-4C1E-9328-ADEB709CF261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A29C52B-42EF-4F8D-B122-D7B8571F177A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A29C52B-42EF-4F8D-B122-D7B8571F177A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A29C52B-42EF-4F8D-B122-D7B8571F177A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A29C52B-42EF-4F8D-B122-D7B8571F177A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50625BCF-D8F8-46E7-A2E9-A43ABC2AB5CA}
+	EndGlobalSection
+EndGlobal
