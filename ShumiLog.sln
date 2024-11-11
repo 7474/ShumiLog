@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShumiLog.Data", "ShumiLog.Data\ShumiLog.Data.csproj", "{739314BF-AC32-4184-BE9A-D7A0AE94636F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{4A29C52B-42EF-4F8D-B122-D7B8571F177A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A29C52B-42EF-4F8D-B122-D7B8571F177A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A29C52B-42EF-4F8D-B122-D7B8571F177A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{739314BF-AC32-4184-BE9A-D7A0AE94636F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{739314BF-AC32-4184-BE9A-D7A0AE94636F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{739314BF-AC32-4184-BE9A-D7A0AE94636F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{739314BF-AC32-4184-BE9A-D7A0AE94636F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

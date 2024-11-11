@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShumiLog.ApiService\ShumiLog.ApiService.csproj" />
+    <ProjectReference Include="..\ShumiLog.Data\ShumiLog.Data.csproj" />
     <ProjectReference Include="..\ShumiLog.Web\ShumiLog.Web.csproj" />
   </ItemGroup>
 

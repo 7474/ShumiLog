@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ShumiLog.ApiService
+namespace ShumiLog.Data.Context
 {
     public class ApplicationDbContext : DbContext
     {
@@ -8,5 +8,7 @@ namespace ShumiLog.ApiService
             : base(options)
         {
         }
+
+        public DbSet<Model.WeatherForecast> WeatherForecasts { get; set; }
     }
 }
