@@ -13,17 +13,17 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        context.Database.EnsureCreated();
-    }
+    // See. MigrationService
+    //using (var scope = app.Services.CreateScope())
+    //{
+    //    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    //    context.Database.EnsureCreated();
+    //}
 }
 else
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days.
-    // You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    //  https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -33,7 +33,7 @@ app.UseExceptionHandler();
 app.MapGet("/weatherforecast", () =>
 {
     using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    using var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     var forecast = db.WeatherForecasts.OrderBy(x => x.Date).ToList();
     return forecast;
 });
