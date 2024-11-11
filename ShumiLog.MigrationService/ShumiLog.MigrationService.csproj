@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-ShumiLog.MigrationService-6b52fd98-c982-41d5-b894-fe00788d00e2</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Pomelo.EntityFrameworkCore.MySql" Version="8.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShumiLog.Data\ShumiLog.Data.csproj" />
+    <ProjectReference Include="..\ShumiLog.ServiceDefaults\ShumiLog.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>
