@@ -2,7 +2,8 @@ using Aspire.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var mysql = builder.AddMySql("mysql");
+var mysql = builder.AddMySql("mysql")
+    .WithPhpMyAdmin();
 var mysqldb = mysql.AddDatabase("mysqldb");
 
 builder.AddProject<Projects.ShumiLog_MigrationService>("migrations")
