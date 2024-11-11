@@ -1,23 +1,93 @@
 namespace ShumiLog.MigrationService;
 
-public class Worker : BackgroundService
-{
-    private readonly ILogger<Worker> _logger;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
+using OpenTelemetry.Trace;
+using ShumiLog.Data.Context;
+using ShumiLog.Data.Model;
+using System.Diagnostics;
 
-    public Worker(ILogger<Worker> logger)
+public class Worker(
+    IServiceProvider serviceProvider,
+    IHostApplicationLifetime hostApplicationLifetime) : BackgroundService
+{
+    public const string ActivitySourceName = "Migrations";
+    private static readonly ActivitySource s_activitySource = new(ActivitySourceName);
+
+    protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        _logger = logger;
+        using var activity = s_activitySource.StartActivity("Migrating database", ActivityKind.Client);
+
+        try
+        {
+            using var scope = serviceProvider.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            await EnsureDatabaseAsync(dbContext, cancellationToken);
+            await RunMigrationAsync(dbContext, cancellationToken);
+            await SeedDataAsync(dbContext, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            activity?.RecordException(ex);
+            throw;
+        }
+
+        hostApplicationLifetime.StopApplication();
     }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    private static async Task EnsureDatabaseAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        var dbCreator = dbContext.GetService<IRelationalDatabaseCreator>();
+
+        var strategy = dbContext.Database.CreateExecutionStrategy();
+        await strategy.ExecuteAsync(async () =>
         {
-            if (_logger.IsEnabled(LogLevel.Information))
+            // Create the database if it does not exist.
+            // Do this first so there is then a database to start a transaction against.
+            if (!await dbCreator.ExistsAsync(cancellationToken))
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                await dbCreator.CreateAsync(cancellationToken);
             }
-            await Task.Delay(1000, stoppingToken);
-        }
+        });
+    }
+
+    private static async Task RunMigrationAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
+    {
+        var strategy = dbContext.Database.CreateExecutionStrategy();
+        await strategy.ExecuteAsync(async () =>
+        {
+            // Run migration in a transaction to avoid partial migration if it fails.
+            await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+            await dbContext.Database.MigrateAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+        });
+    }
+
+    private static async Task SeedDataAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
+    {
+        var summaries = new[]
+        {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+        var forecast = Enumerable.Range(1, 5).Select(index =>
+            new WeatherForecast()
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = summaries[Random.Shared.Next(summaries.Length)]
+            })
+            .ToArray();
+
+        var strategy = dbContext.Database.CreateExecutionStrategy();
+        await strategy.ExecuteAsync(async () =>
+        {
+            // Seed the database
+            await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+            await dbContext.WeatherForecasts.AddRangeAsync(forecast, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+        });
     }
 }
